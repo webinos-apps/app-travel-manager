@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webinos Travel</title>
+<link rel="stylesheet" href="../../css/ce.css">
+<link href='http://fonts.googleapis.com/css?family=Mate+SC' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
+</head>
+<body class="nav footer-nav">
+	<header>
+		<nav>
+		<ul class="four">
+		<li class="travel current"><a href="index.html"><span>Travel</span></a></li>
+		<li class="poi"><a href="../poi/index.html"><span>POI</span></a></li>
+		<!--<li class="users"><a href="../users/index.html"><span>Users</span></a></li>-->
+		<li class="location"><a href="../location/index.html"><span>Location</span></a></li>
+		<li class="profilemenu">
+			<a href="#"><span>Profile</span></a>
+			<ul id="profilemenu">
+				<!--<li><a href="#">My profile</a></li>
+				<li><a href="#">Preferences</a></li>
+				<li><a href="#">Logout</a></li>-->
+				<li><a href="#" rel="#syncoverlay">Sync Devices</a></li>
+			</ul>
+		</li>
+		</ul>
+		</nav>
+	</header>
+
+<div id="content">
+	<div id="brdcrmb" class="temporarydisabled">Travel &gt; Exemplary Imaginary Travel</div>
+
+	<div class="leftcolumn smallone req temporarydisabled">
+		<h3>Proposed POIs</h3>
+		<hr>
+		<ul class="poithumbs">
+		<li class="ainline"><h4 class="created">by <a href="../users/user.html">Sir Henry Vane the Younger</a></h4></li>
+		<li><h4 class="date">12.12.2012</h4></li>
+		<li>
+			<a href="../poi/poi.html">
+			<img >
+			<div>
+			<h4>The Sphere Of Doom</h4>
+			<p>Country, city</p>
+			<p class="notes">Lorem Travelipsum. We'll be here the whole day. I love those spheres. They fill my heart with gloomy joy.</p>
+			</div>
+			</a>
+		</li>
+		</ul>
+	</div>
+
+	<div class="onecolumn"><!--phase two: rightcolumn-->
+	<h2 class="traveltitle" id="travelname">Exemplary Imaginary Travel</h2>
+	<h4 class="created">
+		<!--<span>created by <a href="../users/user.html">George Sandman</a></span>-->
+		<!--<span>created by <a href="../users/user.html">You</a></span>-->
+		<a href="addedit.html" class="edit" id="trvledit">[edit]</a>
+	</h4>
+	<hr>
+	<ul class="poithumbs" id="poilist">
+		<!--
+		<li><h4 class="date">12.12.2012</h4></li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../../images/samples/poi1.jpg">
+			<div>
+			<h4>Fearbringing Forest</h4>
+			<p>Country, city</p>
+			<p class="notes">09:00 &mdash; 12:00. Remember to bring blankets.</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../../images/samples/poi2.jpg">
+			<div>
+			<h4>Swashbucklers' Sea</h4>
+			<p>Country, city</p>
+			<p class="notes"></p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../../images/samples/poi3.jpg">
+			<div>
+			<h4>Manbending Mountains</h4>
+			<p>Country, city</p>
+			<p class="notes">No. Just No.</p>
+			</div>
+			</a>
+		</li>
+		-->
+	</ul>
+	</div>
+
+	<div class="leftcolumn smallone temporarydisabled">
+	<h3>Fellow travelers</h3>
+	<ul class="usrlstimg">
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Robert Babicz</h4></a></li>
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Jesse Somfay</h4></a></li>
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Henry Saiz</h4></a></li>
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Arthur Oskan</h4></a></li>
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Axel Helios</h4></a></li>
+	</ul>
+	</div>
+
+	<div class="rightcolumn bigone temporarydisabled">
+	<h3>Comments</h3>
+	<ul class="comments">
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Ursula Nicorn</h4></a><p>We should really stop by a Liopleurodon. That would be an adventure!</p></li>
+		<li><a href="../users/user.html"><img src="../../images/contact.png"><h4>Charles Tetrapod</h4></a><p>Yeah, uh, thanks, but no thanks. I'm gonna stay out here.</p></li>
+		<li>
+			<a href="../users/user.html"><img src="../../images/contact.png"><h4>You</h4></a>
+			<form>
+				<textarea></textarea>
+				<input type="submit" value="Post comment">
+			</form>
+		</li>
+	</ul>
+	</div>
+</div>
+
+<footer id="guest" class="hidden">
+	<nav>
+		<ul class="two">
+		<li class="accept"><a href="#" rel="#accept"><span>Accept</span></a></li>
+		<li class="decline"><a href="#" rel="#decline"><span>Decline</span></a></li>
+		</ul>
+	</nav>
+</footer>
+<footer id="admin">
+	<nav>
+		<ul class="two">
+		<li class="traveledit"><a href="addedit.html" id="submenu_trvledit"><span>Update travel</span></a></li>
+		<!--<li class="decline"><a href="#" rel="#invite"><span>Invite to</span></a></li>
+		<li class="share"><a href="#" rel="#share"><span>Share</span></a></li>-->
+		<li class="traveldel"><a href="#" id="submenu_trvldelete"><span>Delete travel</span></a></li>
+		</ul>
+	</nav>
+</footer>
+<!--
+<div class="overlay" id="accept">
+	<h3>Accept Invitation</h3>
+	<hr>
+	<p>Please confirm:</p>
+	<div class="topspace">
+		<a class="button inline close">OK</a>
+		<a class="button inline close">Cancel</a>
+	</div>
+</div>
+
+<div class="overlay" id="decline">
+	<h3>Decline Invitation</h3>
+	<hr>
+	<p>Please confirm:</p>
+	<div class="topspace">
+		<a class="button inline close">OK</a>
+		<a class="button inline close">Cancel</a>
+	</div>
+</div>
+
+<div class="overlay" id="invite">
+	<h3>Invite user</h3>
+	<hr>
+	<form>
+		<label for="travelname">Start typing the name of a friend to invite</label>
+		<input type="text" id="travelname">
+		<input type="button" value="Add to list">
+		<ul id="userlist" class="userlist topspace">
+		<li><span>User Name</span><p id="user4314">X</p></li>
+		<li><span>User Fancyname ReallyLong-Surname</span><p id="user43123">X</p></li></li>
+		<li><span>User Name</span><p id="user5249">X</p></li></li>
+		</ul>
+		<div class="topspace">
+			<a class="button inline close">Invite</a>
+			<a class="button inline close">Cancel</a>
+		</div>
+	</form>
+</div>
+
+<div class="overlay" id="share">
+	<h3>Share</h3>
+	<hr>
+	<img src="../../images/share/tw.png">
+	<img src="../../images/share/fb.png">
+	<img src="../../images/share/gp.png">
+	<a class="button close">Cancel</a>
+</div>
+-->
+<script type="text/javascript" src="../../../general/js/webinos.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../../../general/js/essentials.js"></script>
+<script type="text/javascript" src="../../../general/js/sync.js"></script>
+<script type="text/javascript" src="../../js/travel.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	/*
+	$("footer a[rel]").overlay({
+		top: 'center',
+		close: "a.close"
+	});
+
+	$("#userlist p").each(function() {
+		$(this).on('click', function(e) {
+			$(this).parent().hide('slow', function(){ $(this).remove(); });
+		});
+	});
+	*/
+
+	TravelGeneral.PageInit();
+	TravelDetails.PageInit();
+
+	if (window.innerWidth > 1200) {
+		var resizeForOverflow = document.getElementById("poilist");
+		resizeForOverflow.style.height = window.innerHeight - resizeForOverflow.offsetTop - 50 +"px";
+		setTimeout(function() {resizeForOverflow.style.height = window.innerHeight - resizeForOverflow.offsetTop - 50 +"px";}, 1000); //due to slow fonts
+		resizeForOverflow.style.overflow = "auto";
+	}
+});
+</script>
+</body>
+</html>

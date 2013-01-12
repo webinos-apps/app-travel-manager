@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webinos Travel</title>
+<link rel="stylesheet" href="../../css/ce.css">
+<link href='http://fonts.googleapis.com/css?family=Mate+SC' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
+</head>
+<body class="nav footer-nav">
+	<header>
+		<nav>
+		<ul class="four">
+		<li class="travel current"><a href="index.html"><span>Travel</span></a></li>
+		<li class="poi"><a href="../poi/index.html"><span>POI</span></a></li>
+		<!--<li class="users"><a href="../users/index.html"><span>Users</span></a></li>-->
+		<li class="location"><a href="../location/index.html"><span>Location</span></a></li>
+		<li class="profilemenu">
+			<a href="#"><span>Profile</span></a>
+			<ul id="profilemenu">
+				<!--<li><a href="#">My profile</a></li>
+				<li><a href="#">Preferences</a></li>
+				<li><a href="#">Logout</a></li>-->
+				<li><a href="#" rel="#syncoverlay">Sync Devices</a></li>
+			</ul>
+		</li>
+		</ul>
+		</nav>
+	</header>
+
+<div id="content">
+	<div class="leftcolumn smallone req temporarydisabled">
+	<h3>Travel invitations</h3>
+	<ul class="ainline">
+		<li><h5>29.02.2012</h5>
+		<ul>
+			<li><a href="travel.html">Deep diving</a> <span class="created">(created by <a href="../users/user.html">Virgil Brigman</a>)</span></li>
+		</ul></li>
+		<li><h5>30.02.2012</h5>
+		<ul>
+			<li><a href="travel.html">Hell Valley trip</a> <span class="created">(created by <a href="../users/user.html">Damien Thorn</a>)</span></li>
+			<li><a href="travel.html">Circling around</a> <span class="created">(created by <a href="../users/user.html">Dante Alighieri</a>)</span></li>
+		</ul></li>
+	</ul>
+	</div>
+
+	<div class="rightcolumn bigone">
+	<a href="addedit.html" id="acttredit" class="hidden">[edit]</a>
+	<h3>Active Travel</h3>
+	<p class="ainline"><a href="travel.html" id="travelname" class="hidden">Name of a travel</a> <!--<span class="created">(created by <a href="../users/user.html" id="acttrcreat">Phileas Fogg</a>)</span>--></p>
+	<hr>
+	<ul class="poithumbs" id="poilist">
+		<li><h4 class="no">No active travels.</h4></li>
+		<!--
+		<li><h4 class="date">12.12.2012</h4></li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../img/samples/poi1.jpg">
+			<div>
+			<h4>Fearbringing Forest</h4>
+			<p>Country, city</p>
+			<p class="notes">We shall bury Steve here. Don't worry, I'll wear my robe.</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../img/samples/poi2.jpg">
+			<div>
+			<h4>Swashbucklers' Sea</h4>
+			<p>Country, city</p>
+			<p class="notes">Arrrr...</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../img/samples/poi3.jpg">
+			<div>
+			<h4>Manbending Mountains</h4>
+			<p>Country, city</p>
+			<p class="notes">For the last time - No.</p>
+			</div>
+			</a>
+		</li>
+		<li><h4 class="date">13.12.2012</h4></li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../img/samples/poi6.jpg">
+			<div>
+			<h4>The place to drink a beer and ponder about life</h4>
+			<p>Country, city</p>
+			<p class="notes">This is where I'll depart and travel on my own. The people of Zeta Reticuli need me and you wouldn't understand anyway. So this will be our goodbye. I'm sure something wonderful is going to happen.</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="../poi/poi.html">
+			<img src="../img/samples/poi7.jpg">
+			<div>
+			<h4>The Sphere Of Doom</h4>
+			<p>Country, city</p>
+			<p class="notes">Oh my god, it's full of stars.</p>
+			</div>
+			</a>
+		</li>
+		-->
+	</ul>
+	</div>
+
+	<div class="leftcolumn smallone">
+	<h3>Last travels</h3>
+	<p class="hidden">(Follow the links to go to the travel logbook<!--, where you can upload pictures-->)</p>
+	<ul class="trvllist" id="pasttravels">
+		<li><h4 class="no">No past travels.</h4></li>
+		<!--
+		<li>
+			<h5>01.01.1968</h5>
+			<a href="logbook.html">The journey, that never was</a> <span class="created">(created by <a href="user.html">You</a>)</span>
+		</li>
+		-->
+	</ul>
+	</div>
+
+	<div class="leftcolumn smallone">
+	<h3>Next travels</h3>
+	<ul class="trvllist" id="nexttravels">
+		<li><h4 class="no">No future travels.</h4></li>
+		<!--
+		<li>
+			<h5>01.01.2012 &mdash; 02.01.2012</h5>
+			<a href="travel.html">End of the world trip</a> <span class="created">(created by <a href="user.html">You</a>)</span>
+		</li>
+		<li>
+			<h5>03.02.2012</h5>
+			<a href="travel.html">Iapetus exploration</a> <span class="created">(created by <a href="user.html">You</a>)</span>
+		</li>
+		-->
+	</ul>
+	</div>
+
+	<div id="conftravelscontainer" class="leftcolumn smallone req hidden">
+	<h3>Conflicts</h3>
+	<p>(These travels can be considered "active", but have dates overlapping with the first one on this list.)</p>
+	<hr>
+	<ul class="trvllist" id="conftravels">
+	</ul>
+	</div>
+</div>
+
+<footer>
+  <nav>
+    <ul class="one">
+      <li class="traveladd"><a href="addedit.html"><span>New Travel</span></a></li>
+    </ul>
+  </nav>
+</footer>
+<script type="text/javascript" src="../../../general/js/webinos.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../../../general/js/essentials.js"></script>
+<script type="text/javascript" src="../../../general/js/sync.js"></script>
+<script type="text/javascript" src="../../js/travel.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	TravelGeneral.PageInit();
+	TravelIndex.PageInit();
+
+	if (window.innerWidth > 1200) { //mind the different direction of sign
+		//right one
+		var resizeForOverflow = document.getElementById("poilist");
+		resizeForOverflow.style.height = window.innerHeight - resizeForOverflow.offsetTop - 50 +"px";
+		resizeForOverflow.style.overflow = "auto";
+		//first left
+		resizeForOverflow = document.getElementById("pasttravels");
+		var destHeight = (window.innerHeight - resizeForOverflow.offsetTop)/2 - 75;
+		resizeForOverflow.style.height = destHeight +"px"
+		resizeForOverflow.style.overflow = "auto";
+		//second left
+		resizeForOverflow = document.getElementById("nexttravels");
+		resizeForOverflow.style.height = destHeight +"px";
+		resizeForOverflow.style.overflow = "auto";
+
+	}
+});
+</script>
+</body>
+</html>

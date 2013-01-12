@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webinos Travel</title>
+    <link rel="stylesheet" href="css/automotive.css"/>
+    <script type="text/javascript" src="../general/js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../general/js/webinos.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="../general/js/essentials.js"></script>
+    <script type="text/javascript" src="js/automotive.js"></script>
+    <script type="text/javascript" src="../general/js/sync.js"></script>
+  </head>
+  
+  <body>
+    <div id='start'>
+      <div id='logobox'>
+        <img id='logo' src='../general/images/logo_260.png' />
+      </div>
+    </div>
+    <div id='home' class='disabled'>
+      <div id='toplevel-nav'><a tabindex='1' id='h-start' /></a>
+        <div class='navbox' id='currentTravelJumper'>
+          <div class='nav-icon'>
+            <ul>
+              <li>
+                <a href='#' id='l0' tabindex='1'>
+                  <img src='images/icons/travel-current.png' height='90' width='90'>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class='nav-desc'>Current Travel</div>
+        </div>
+        <div class='navbox' id='activePoiJumper'>
+          <div class='nav-icon'>
+            <ul>
+              <li>
+                <a href='#' id='l1' tabindex='1'>
+                  <img src='images/icons/poi-active.png' height='90' width='90'>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class='nav-desc'>Active POI</div>
+        </div>
+        <div class='navbox'>
+          <div class='nav-icon'>
+            <ul>
+              <li>
+                <a href='#travelPreList' id='l2' tabindex='1'>
+                  <img src='images/icons/travels.png' height='90' width='90'>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class='nav-desc'>Travels</div>
+        </div>
+        <div class='navbox'>
+          <div class='nav-icon'>
+            <ul>
+              <li>
+                <a href='#poiPreList' id='l3' tabindex='1'>
+                  <img src='images/icons/pois.png' height='90' width='90'>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class='nav-desc'>POIs</div>
+        </div>
+        <div class='navbox'>
+          <div class='nav-icon'>
+            <ul>
+              <li>
+                <a href='javascript:doAutomotiveUpdate();' id='l4' tabindex='1' id='triggerSync'>
+                  <img src='images/icons/sync.png' height='90' width='90'>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class='nav-desc'>Sync</div>
+        </div><a tabindex='6' id='h-end' /></a>
+      </div>
+    </div>
+    <div id="mapcanvas" class='disabled'></div>
+    <div id='travelPreList' class='navigationlist disabled'>
+      	<h1><span class='type'>travels</span> Selection</h1>
+<a tabindex='1' id='tpl-start' /></a>
+      <ul id='v-travellprelist'>
+        <li id='currentTravelJumper2'>
+          <a href='#travel' id='showCurrentTravel' tabindex='1'>Current travel</a>
+        </li>
+        <li>
+          <a href='#travelList-planned' id='showPlannedTravels' tabindex='1'>Upcoming travels</a>
+        </li>
+        <li>
+          <a href='#travelList-past' id='showPastTravels' tabindex='1'>Past travels</a>
+        </li>
+        <li>
+          <a href='#travelList' id='showAllTravels' tabindex='1'>All travels</a>
+        </li>
+      </ul><a tabindex='1' id='tpl-end' /></a>
+    </div>
+    <div id='poiPreList' class='navigationlist disabled'>
+      	<h1><span class='type'>pois</span> Selection</h1>
+<a tabindex='1' id='ppl-start' /></a>
+      <ul id='v-poiprelist'>
+        <li id='activePoiJumper2'>
+          <a href='#poi' id='ppl1' tabindex='1'>Active POI</a>
+        </li>
+        <li>
+          <a href='#poiList-nearby' id='ppl2' tabindex='1'>POIs in vicinity</a>
+        </li>
+        <li>
+          <a href='#poiList-planned' id='ppl3' tabindex='1'>Planned POIs</a>
+        </li>
+        <li>
+          <a href='#poiList-visited' id='ppl4' tabindex='1'>Visited POIs</a>
+        </li>
+        <li>
+          <a href='#poiList-all' id='ppl5' tabindex='1'>All POIs</a>
+        </li>
+      </ul><a tabindex='1' id='ppl-end' /></a>
+    </div>
+    <div id='travelList' class='navigationlist disabled'>
+      	<h1><span class='type'>travels</span> <span id='travllisteType'></span></h1>
+<a tabindex='1' id='tl-start' /></a>
+      <div class='srollableList'>
+        <ul id='v-travellist'></ul><a tabindex='1' id='tl-end' /></a>
+      </div>
+    </div>
+    <div id='poiList' class='navigationlist disabled'>
+      	<h1><span class='type'>pois</span> <span id='pl-header'></span></h1>
+
+      <div class='srollableList'><a tabindex='1' id='pl-start' /></a>
+        <ul id='poi-list'></ul><a tabindex='1' id='pl-end' /></a>
+      </div>
+    </div>
+    <div id='travel' class='disabled'>
+      	<h1><span class='type'>trip</span> <span id='travelTitle'></span></h1>
+
+      <div class='contentbox'>
+        <div class='propertybox'>
+          <div class='description'>start date</div>
+          <div class='value'><span id='travelStart'></span>
+
+          </div>
+        </div>
+        <div class='propertybox'>
+          <div class='description'>end date</div>
+          <div class='value'><span id='travelEnd'></span></div>
+        </div>
+        <div class='propertybox-long'>
+          <div class='description-long'>notes</div>
+          <div class='value long'><span id='travelNotes'></span></div>
+        </div>
+      </div>
+      <div class='options'>
+        	<h2>POIs for <b><span id='travelTitle-2'></span></b></h2>
+					<a tabindex='1' id='tp-start' /></a>
+        	<div class='navigationlist boxed'>
+          	<ul id='travel-poi-list'></ul>
+        	</div>
+        	<a tabindex='1' id='tp-end' /></a>
+      </div>
+    </div>
+    <div id='poi' class='navigationlist disabled'>
+      	<h1><span class='type'>poi</span> <span id='poiTitle'></span></h1>
+    	  <div class='propertybox' id='poiTiming'>
+      	  <div id='poiTimingDesc' class='description'>visiting</div>
+       		<div class='value'><span id='poiTimingText'></span></div>
+      </div>
+      <div class='propertybox-doublelong'>
+        <div class='description-long'>description</div>
+        <div class='value long'><span id='poiDescription'></span>
+
+        </div>
+      </div>
+      <div class='options optionspoi'>
+			<h2>Options</h2>
+
+        <div class='navigationlist boxed'><a tabindex='1' id='pf-start' /></a>
+          <ul id='poi-functions'>
+            <li>
+              <a href='#poi' tabindex='1' id='guidance'>Request guidance</a> <span class='statusGuidance'></span>
+            </li>
+            <li>
+              <a href='#poi' tabindex='1' id='markreached'>Mark as visited</a>
+            </li>
+          </ul><a tabindex='1' id='pf-end' /></a>
+        </div>
+      </div>
+    </div>
+    <div id='loadingbox'></div>
+  </body>
+</html>
