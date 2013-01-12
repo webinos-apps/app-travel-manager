@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webinos Travel</title>
+<link rel="stylesheet" href="../../css/ce.css">
+<link href='http://fonts.googleapis.com/css?family=Mate+SC' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
+</head>
+<body class="loc nav"><!--footer-nav-->
+
+<header>
+	<nav>
+	<ul class="four">
+	<li class="travel"><a href="../travel/index.html"><span>Travel</span></a></li>
+	<li class="poi"><a href="../poi/index.html"><span>POI</span></a></li>
+	<!--<li class="users"><a href="../users/index.html"><span>Users</span></a></li>-->
+	<li class="location current"><a href="index.html"><span>Location</span></a></li>
+	<li class="profilemenu">
+		<a href="#"><span>Profile</span></a>
+		<ul id="profilemenu">
+			<!--<li><a href="#">My profile</a></li>
+			<li><a href="#">Preferences</a></li>
+			<li><a href="#">Logout</a></li>-->
+			<li><a href="#" rel="#syncoverlay">Sync Devices</a></li>
+		</ul>
+	</li>
+	</ul>
+
+	</nav>
+</header>
+
+<div id="content">
+	<div id="current" class="hidden">Initializing...</div>
+		<div id="map-holder">
+			<div id="map_canvas"></div>
+		</div>
+</div>
+<!--<a class="button sharelocation" href="#">Share location</a>-->
+
+<footer>
+  <nav>
+    <ul class="one">
+      <li class="location"><a href="javascript:stopGuidance();"><span>Stop Guidance</span></a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script type="text/javascript" src="../../../general/js/webinos.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../../general/js/jquery/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../../../general/js/essentials.js"></script>
+<script type="text/javascript" src="../../../general/js/sync.js"></script>
+<script type="text/javascript" src="../../js/travel.js"></script>
+<script type="text/javascript" src="../../js/geo.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../../js/infobox.js"></script>
+<script type="text/javascript" src="../../js/map.js"></script>
+<script type="text/javascript" src="../../js/laststeps.js"></script>
+</body>
+</html>
