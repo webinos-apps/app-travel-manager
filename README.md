@@ -4,6 +4,7 @@ Webinos Travel
 Webinos Travel is a cross-device travel manager. Travel plans can be created and updated on any webinos-enabled CE device. The itineraries are synced 
 across the devices within a personal zone. Webinos travel lets you directly interact with the on-board naviation system.
 
+![Webions travel](https://mediapool.bmwgroup.com/download/edown/pressclub/publicq?actEvent=medium&dokNo=P90105836 "Webinos travel (BMW AG)")
 
 Features
 -------------
