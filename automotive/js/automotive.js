@@ -44,10 +44,10 @@ $(document).ready(function () {
     updateNavigationTree();
   });
   if (connectedSystems.length >= 1) {
-    bindToVehicleSystem(connectedSystems[0].serviceAddress);
+    bindToVehicleSystem(connectedSystems[0]);
   } else {
     wt.addWebinosReadyListener(function () {
-      bindToVehicleSystem(connectedSystems[0].serviceAddress);
+      bindToVehicleSystem(connectedSystems[0]);
     });
   }
   $('#h-end').focus(function () {
@@ -94,14 +94,16 @@ function doAutomotiveUpdate() {
 }
 
 function bindToVehicleSystem(serviceAddress) {
-  wt.log('binding to vehicle system at' + serviceAddress);
-  webinos.discovery.findServices(new ServiceType("http://webinos.org/api/vehicle"), {
+  wt.log('binding to vehicle system at ' + wt.distillDeviceInfo(serviceAddress).name);
+  
+
+   webinos.discovery.findServices(new ServiceType("http://webinos.org/api/vehicle"), {
     onFound: function (service) {
       if (service.serviceAddress == serviceAddress) {
         vehicle = service;
         vehicle.bindService({
           onBind: function () {
-            wt.log('Connected to vehicle service at ' + serviceAddress);
+            wt.log('Connected to vehicle service at ' + wt.distillDeviceInfo(serviceAddress).name);
             bindToGeolocationSystem(serviceAddress);
             vehicleDataAvailable = true;
             vehicle.addEventListener('shift', handleGear, false);
