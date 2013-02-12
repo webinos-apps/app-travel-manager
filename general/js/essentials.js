@@ -574,34 +574,30 @@ wt.log = function(message){
 }
 
 wt.connectToWebinos = function(){
-	
-	webinos.discovery.findServices(new ServiceType('http://webinos.org/api/test'), {
-			onFound: function (service) {
-				connectedSystems.push(service);
-				wt.newDeviceFound(service.serviceAddress);
-				if(connectedSystems.length == 1){
-					wt.log("Your device: " + connectedSystems[0].serviceAddress);
-					
+	var myDevice = wt.distillDeviceInfo(webinos.session.getPZPId());
+	wt.log("Your device: " + myDevice.name);
 
-					wt.webinosReady();
-				}
-			},
-			onError: function (error) {
-				alert("Error finding service: " + error.message + " (#" + error.code + ")");
-			}
-	});
-}
+	connectedSystems.push(webinos.session.getPZPId());
+
+	var otherDevices = webinos.session.getOtherPZP();
+	for(var i =0; i < otherDevices.length; i++){
+		connectedSystems.push(otherDevices[i]);
+	}
+	console.log(otherDevices);
+	wt.webinosReady();
+
+};
 
 wt.init = function(){
 	// Ensures that the doUpdate is triggered in case that the travel-sync was already initialized and we missed the callback
 	// prevents from adding a redundant listener
 	if(updateReady){
-		doUpdate();
-		wt.startSyncInterval();
+		//doUpdate();
+		//wt.startSyncInterval();
 	} else {
 		sync.addUpdateReadyListener(function(){
-			doUpdate();
-			wt.startSyncInterval();
+			//doUpdate();
+			//wt.startSyncInterval();
 		});
 	}
 }
@@ -622,11 +618,24 @@ wt.intervalSync= function(){
 	doUpdate();
 }
 
+wt.distillDeviceInfo = function(serviceAddress){
+    var hubIp = serviceAddress.substring(0,serviceAddress.indexOf('_'));
+    var zoneId = serviceAddress.substring(serviceAddress.indexOf('_')+1, serviceAddress.indexOf('/')); //user
+    var hostPzp = serviceAddress.substring(serviceAddress.indexOf('/')+1); //device
+    return new WebinosDevice(hostPzp, zoneId);
+};
+
+
+
 $(document).ready(function() {
 	wt.initializeData();
 	try{
-		wt.addWebinosReadyListener(wt.init);
-		wt.connectToWebinos();
+		webinos.session.addListener('registeredBrowser', function () {
+			wt.addWebinosReadyListener(wt.init);
+			wt.connectToWebinos();
+		});
+
+		
 		
 	}catch(e){
 		alert('webinos not available. Using locally');
@@ -641,3 +650,8 @@ $(document).ready(function() {
 $(document).unload(function(){
 	wt.saveDataToLocalStorage();
 });
+
+function WebinosDevice(name, user){ 
+        this.name=name;
+        this.user=user;
+};

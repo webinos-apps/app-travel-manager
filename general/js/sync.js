@@ -31,30 +31,33 @@ sync.initializeSyncing = function(){
 	webinos.discovery.findServices(new ServiceType("http://webinos.org/api/file"), {
 		onFound: function (service) {
 			console.log('file service at ' + service.serviceAddress);
-			if(service.serviceAddress == connectedSystems[0].serviceAddress){
+			if(service.serviceAddress == connectedSystems[0]){
 				// LOCAL FILE SYSTEM
 				service.bindService({
 					onBind: function () {
 						//alert(connectedSystems[0].serviceAddress);
-						service.requestFileSystem(webinos.file.LocalFileSystem.PERSISTENT, 1024, function (filesystem) {					
+						//TODO CHANGE TO NEW FILE SYSTEM APP
+						/* service.requestFileSystem(webinos.file.LocalFileSystem.PERSISTENT, 1024, function (filesystem) {					
 							console.log('address of local file service ' + filesystem._service.serviceAddress);							
 							updateFileServices.push(filesystem); //do we still need this?
 							initFs(filesystem);
 						}, function (error) {
 							alert("Error requesting filesystem (#" + error.code + ")");
-						});
+						}); */
 					}
 				});
 			} else {
 				// REMOTE FILE SYSTEM
 				service.bindService({
 						onBind: function () {
+							/* TODO UPDATE WITH NEW FILE SYSTEM
 							service.requestFileSystem(webinos.file.LocalFileSystem.PERSISTENT, 1024, function (filesystem) {
 								console.log('address of remote file service ' + filesystem._service.serviceAddress);
 								initFsForExport(filesystem);
 							}, function (error) {
 								alert("Error requesting remote filesystem (#" + error.code + ")");
 							});
+							*/
 						}
 				});
 			}

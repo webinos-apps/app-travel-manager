@@ -8,10 +8,10 @@ var showStopGuidance = false;
 // first: find webinos geolocation service via webinos servicediscovery
 $(document).ready(function() {
 	if (connectedSystems.length >= 1) {
-		findGeolocationService(connectedSystems[0].serviceAddress);
+		findGeolocationService(connectedSystems[0]);
 	} else {
 		wt.addWebinosReadyListener(function() {
-			findGeolocationService(connectedSystems[0].serviceAddress);
+			findGeolocationService(connectedSystems[0]);
 		});
 	}
 	setMapHeight();

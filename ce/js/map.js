@@ -40,15 +40,16 @@ function init_map()
 
 function initialize_geolocation()
 {
+
 	try{
 		if(currentPosition != null){
 			show_position(currenPosition);
 		}
 		if(connectedSystems.length >= 1){
-			bindToGeolocationSystem(connectedSystems[0].serviceAddress);
+			bindToGeolocationSystem(connectedSystems[0]);
 		}else{
 			wt.addWebinosReadyListener(function(){
-			bindToGeolocationSystem(connectedSystems[0].serviceAddress);
+			bindToGeolocationSystem(connectedSystems[0]);
 		});
 		}
 	}catch(e){
@@ -68,6 +69,8 @@ function bindToGeolocationSystem(serviceAddress){
 							geolocation.getCurrentPosition(show_position, errorHandler);
 						}
 					});
+				}else{
+
 				}
 			},
 			onError: function (error) {
