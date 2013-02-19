@@ -31,7 +31,7 @@ $(document).ready(function() {
 		}
 	});
 
-	alert('hier');
+	
 	
 	if(connectedSystems.length >= 1){
 		$('#devicelist').append('<p><b>' + wt.distillDeviceInfo(connectedSystems[0].serviceAddress).name +' (this)</b></p>');
