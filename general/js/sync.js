@@ -21,43 +21,35 @@ var sync = sync || {}; //namespace to contain the general functions
 updateReady = false;
 
 sync.initializeSyncing = function(){
-	
-	//FILE SYSTEM
-//	var options = {}; // empty, but we need it, or else we cannot pass filter
-//	var remoteFilter = {
-//		remoteServices: true
-//	};
-
-	webinos.discovery.findServices(new ServiceType("http://webinos.org/api/file"), {
+		webinos.discovery.findServices(new ServiceType("http://webinos.org/api/file"), {
 		onFound: function (service) {
-			console.log('file service at ' + service.serviceAddress);
+			//alert('file service at ' + service.serviceAddress);
 			if(service.serviceAddress == connectedSystems[0]){
 				// LOCAL FILE SYSTEM
 				service.bindService({
 					onBind: function () {
+						console.log(connectedSystems[0]);
 						//alert(connectedSystems[0].serviceAddress);
-						//TODO CHANGE TO NEW FILE SYSTEM APP
-						/* service.requestFileSystem(webinos.file.LocalFileSystem.PERSISTENT, 1024, function (filesystem) {					
-							console.log('address of local file service ' + filesystem._service.serviceAddress);							
+						service.requestFileSystem(1, 1024, function (filesystem) {					
+							console.log('address of local file service ');							
 							updateFileServices.push(filesystem); //do we still need this?
 							initFs(filesystem);
 						}, function (error) {
 							alert("Error requesting filesystem (#" + error.code + ")");
-						}); */
+						});
 					}
 				});
 			} else {
 				// REMOTE FILE SYSTEM
 				service.bindService({
 						onBind: function () {
-							/* TODO UPDATE WITH NEW FILE SYSTEM
-							service.requestFileSystem(webinos.file.LocalFileSystem.PERSISTENT, 1024, function (filesystem) {
-								console.log('address of remote file service ' + filesystem._service.serviceAddress);
+							service.requestFileSystem(1, 1024, function (filesystem) {
+								console.log('address of remote file service ');
 								initFsForExport(filesystem);
 							}, function (error) {
 								alert("Error requesting remote filesystem (#" + error.code + ")");
 							});
-							*/
+							
 						}
 				});
 			}
@@ -82,12 +74,12 @@ sync.initializeSyncing = function(){
 
 //INIT FOR REMOTE SYSTEMS
 function initFsForExport(fs){ 
-	fs.root.getDirectory('/', { create: false, exclusive: false }, handleExportFiles, handleErrors);
+	fs.root.getDirectory('/travel/updates', { create: false, exclusive: false }, handleExportFiles, handleErrors);
 }
 
 //INIT FOR LOCAL SYSTEM
 function initFs(fs){
-	fs.root.getDirectory('/', { create: false }, handleFiles, handleErrors);
+	fs.root.getDirectory('/travel/exports', { create: false }, handleFiles, handleErrors);
 }
 
 function handleExportFiles(entry){
@@ -127,9 +119,9 @@ function doExport() {
 		var exportFile = JSON.stringify(currentExportJSONFile);
 		
 		// TODO DELETE
-		console.log(PRE + TAG + "Writes export/update file with content: START FILE CONTENT");
-		console.log(exportFile);
-		console.log(PRE + TAG + 'END FILE CONTENT');
+		//console.log(PRE + TAG + "Writes export/update file with content: START FILE CONTENT");
+		//console.log(exportFile);
+		//console.log(PRE + TAG + 'END FILE CONTENT');
 		
 		//WRITE TO LOCAL
 		createExportFile(directory, exportFile, 'export');
@@ -656,7 +648,8 @@ function createExportFile(entry, jsonobject, prefix){
 	console.log(PRE + TAG + 'new file is created - ' + prefix + '-file for the JSON-object:');
 	console.log(jsonobject);
 	
-	
+
+
 	
 	entry.getFile(name, {
 				create: true,
@@ -664,33 +657,28 @@ function createExportFile(entry, jsonobject, prefix){
 			}, function (entry) {
 				//success Callback
 				entry.createWriter(function (writer) {
-					
 					var written = false;
-					var bb = new webinos.file.BlobBuilder();
-					bb.append(jsonobject);
-		
-						// TODO Delete
-						console.log(PRE + TAG + 'success callback, jsonobject which is appended:');
-						console.log(jsonobject);
-		
+
 					writer.onerror = function (evt) {
-						alert("Error writing file (#" + evt.targer.error.code + ")");
+				
+						alert("Error writing file (#" + evt.target.error.name + ")");
 					}
-					
+
 					writer.onwrite = function (evt) {
-						if(!written){
+						if (!written) {
 							written = true;
-							if (bb._contentsLength != 0) writer.write(bb.getBlob());
-						}else{
-							console.log('file exported');
+
+							writer.write(new Blob([jsonobject]));
+						} else { 
+
 						}
-						
 					}
-					
+
 					writer.truncate(0);
 				}, function (error) {
-					//error callback for create writer
-					alert("Error retrieving file writer (#" + error.code + ")");
+					editor.dialog("close");
+
+					alert("Error retrieving file writer (#" + error.name + ")");
 				});
 			}, function (error) {
 				//errror callback for get file

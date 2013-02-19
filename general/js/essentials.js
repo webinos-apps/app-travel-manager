@@ -576,12 +576,13 @@ wt.log = function(message){
 wt.connectToWebinos = function(){
 	var myDevice = wt.distillDeviceInfo(webinos.session.getPZPId());
 	wt.log("Your device: " + myDevice.name);
-
+	wt.newDeviceFound(myDevice.name + ' (This device)');
+	
 	connectedSystems.push(webinos.session.getPZPId());
-
 	var otherDevices = webinos.session.getOtherPZP();
 	for(var i =0; i < otherDevices.length; i++){
 		connectedSystems.push(otherDevices[i]);
+		wt.newDeviceFound(wt.distillDeviceInfo(otherDevices[i]).name);
 	}
 	console.log(otherDevices);
 	wt.webinosReady();
@@ -592,12 +593,12 @@ wt.init = function(){
 	// Ensures that the doUpdate is triggered in case that the travel-sync was already initialized and we missed the callback
 	// prevents from adding a redundant listener
 	if(updateReady){
-		//doUpdate();
-		//wt.startSyncInterval();
+		doUpdate();
+		wt.startSyncInterval();
 	} else {
 		sync.addUpdateReadyListener(function(){
-			//doUpdate();
-			//wt.startSyncInterval();
+			doUpdate();
+			wt.startSyncInterval();
 		});
 	}
 }
