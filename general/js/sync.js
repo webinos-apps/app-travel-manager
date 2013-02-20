@@ -214,7 +214,6 @@ function doUpdate() {
 				
 				//TODO: FIX EXPORT serviceName
 				serviceName = exportFileHandles[i].filesystem.service.serviceAddress;
-				alert(serviceName);
 				sync.updateSyncStatus('Pulling updates of ' + serviceName);
 				remoteDirectoryEntries[i] = exportFileHandles[i].createReader();
 				remoteDirectoryEntries[i].readEntries(handleRemoteReadEntry);					
@@ -508,7 +507,9 @@ function fileReaderRemote(entry,index){
 	
 //	alert('now read file');
 	
-	var reader	= new webinos.file.FileReader(entry.filesystem);
+	var reader	= new window.FileReader();
+		
+
 	entry.file(function(f){ reader.readAsText(f) }, handleErrors);
 	reader.onload = function (evt) {
 		// TODO Delete
