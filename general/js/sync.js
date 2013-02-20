@@ -74,12 +74,12 @@ sync.initializeSyncing = function(){
 
 //INIT FOR REMOTE SYSTEMS
 function initFsForExport(fs){ 
-	fs.root.getDirectory('/travel/updates', { create: false, exclusive: false }, handleExportFiles, handleErrors);
+	fs.root.getDirectory('/travel', { create: false, exclusive: false }, handleExportFiles, handleErrors);
 }
 
 //INIT FOR LOCAL SYSTEM
 function initFs(fs){
-	fs.root.getDirectory('/travel/exports', { create: false }, handleFiles, handleErrors);
+	fs.root.getDirectory('/travel', { create: false }, handleFiles, handleErrors);
 }
 
 function handleExportFiles(entry){
