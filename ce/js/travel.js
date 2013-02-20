@@ -30,14 +30,16 @@ $(document).ready(function() {
 			sync.updateSyncStatus('Connection not ready yet! Try again!');
 		}
 	});
+
+	
 	
 	if(connectedSystems.length >= 1){
-		$('#devicelist').append('<p><b>' + connectedSystems[0].serviceAddress +' (this)</b></p>');
+		$('#devicelist').append('<p><b>' + wt.distillDeviceInfo(connectedSystems[0].serviceAddress).name +' (this)</b></p>');
 	}
 
 	if(connectedSystems.length > 1){
 		for(var i = 1; i < connectedSystems.length; i++){
-			$('#devicelist').append('<p>' + connectedSystems[i].serviceAddress +'</p>');
+			$('#devicelist').append('<p>' + wt.distillDeviceInfo(connectedSystems[0].serviceAddress).name +'</p>');
 		}
 	}
 	
