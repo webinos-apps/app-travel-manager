@@ -23,8 +23,7 @@ updateReady = false;
 sync.initializeSyncing = function(){
 		webinos.discovery.findServices(new ServiceType("http://webinos.org/api/file"), {
 		onFound: function (service) {
-			//alert('file service at ' + service.serviceAddress);
-			if(service.serviceAddress == connectedSystems[0]){
+		if(service.serviceAddress == connectedSystems[0]){
 				// LOCAL FILE SYSTEM
 				service.bindService({
 					onBind: function () {
@@ -53,6 +52,7 @@ sync.initializeSyncing = function(){
 						}
 				});
 			}
+			
 		},
 		onError: function (error) {
 			alert("Error finding service: " + error.message + " (#" + error.code + ")");
@@ -84,9 +84,6 @@ function initFs(fs){
 
 function handleExportFiles(entry){
 	var TAG = ' - handleExportFiles(entry) - ';
-	
-    // stores all directory-handles of remote filesystems
-    //alert(entry.filesystem._service.serviceAddress);
 	exportFileHandles.push(entry);
 	console.log(PRE + TAG + 'New remote directory pushed!');
 	
@@ -135,7 +132,7 @@ function doExport() {
 			sync.updateSyncStatus('Pushing  updates to ' + exportFileHandles.length + ' devices.');
 			// write Export-JSONObject to every remote filesystem
 			for (var i=0; i < exportFileHandles.length; i++) {
-				sync.updateSyncStatus('Pushing  updates to ' + exportFileHandles[i].filesystem._service.serviceAddress);
+				sync.updateSyncStatus('Pushing  updates to ' + exportFileHandles[i].filesystem.service.serviceAddress);
 				createExportFile(exportFileHandles[i], exportFile, 'update');
 			}	
 	
@@ -214,7 +211,10 @@ function doUpdate() {
 			sync.updateSyncStatus('Pulling updates from ' + exportFileHandles.length + ' device(s).');
 			// read Export-JSONObject of every remote filesystem, order them by their timestamps in a datastructure
 			for (var i=0; i < exportFileHandles.length; i++) {
-				serviceName = exportFileHandles[i].filesystem._service.serviceAddress;
+				
+				//TODO: FIX EXPORT serviceName
+				serviceName = exportFileHandles[i].filesystem.service.serviceAddress;
+				alert(serviceName);
 				sync.updateSyncStatus('Pulling updates of ' + serviceName);
 				remoteDirectoryEntries[i] = exportFileHandles[i].createReader();
 				remoteDirectoryEntries[i].readEntries(handleRemoteReadEntry);					
@@ -377,7 +377,7 @@ function handleRemoteReadEntry(entries){
 	if(entries.length > 0){
 		
 		// Get last update time for the current device and its name
-		var currentDeviceName = entries[0].filesystem._service.serviceAddress;
+		var currentDeviceName = entries[0].filesystem.service.serviceAddress;
 		sync.updateSyncStatus('Parsing ' + entries.length + ' files of ' + currentDeviceName);
 		//alert('Parsing ' + entries.length + ' files of ' + currentDeviceName);
 		
@@ -917,8 +917,7 @@ function createExportDatabase() {
 		return updateObjects;
 	}
 	
-	//updateObjects.exportingDevice = updateFileServices[0].filesystem._service.serviceAddress; 
-	updateObjects.exportingDevice = connectedSystems[0].serviceAddress; 
+	//updateObjects.exportingDevice = 	updateObjects.exportingDevice = connectedSystems[0].serviceAddress; 
 	updateObjects.creationStamp = exportTime;
 	
 	wt_export = JSON.parse(localStorage.getItem("wt_export")); // refresh the value of the variable
